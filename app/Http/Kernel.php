@@ -21,6 +21,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        /* глобальные middleware, которые применяются ко всем запросам */
+        \App\Http\Middleware\LogMiddleware::class,
     ];
 
     /**
@@ -43,6 +45,11 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+
+        /* Пример группы middleware. Тогда вместо ->middleware(LogMiddleware::class) можем указать ->middleware('test') */
+//        'test' => [
+//            \App\Http\Middleware\LogMiddleware::class,
+//        ]
     ];
 
     /**
@@ -63,5 +70,10 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        /* также можем сделать алиас и указывать ->middleware('log') */
+        //'log' => \App\Http\Middleware\LogMiddleware::class,
+        'active'  => \App\Http\Middleware\ActiveMiddleware::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'token' => \App\Http\Middleware\TokenMiddleware::class,
     ];
 }
