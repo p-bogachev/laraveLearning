@@ -19,7 +19,7 @@ use App\Http\Controllers\MyPlaceController;
 //    return view('welcome');
 //});
 //замена 3 строк выше
-Route::view('/', 'welcome')->name('home');
+Route::view('/', 'home.index')->name('home');
 
 //Пример того, что можно использовать контроллер без вызова метода. Тогда вызовется магический метод __invoke
 Route::get('test', TestController::class)->name('test');
@@ -29,12 +29,13 @@ Route::redirect('redirect', 'mypage')->name('home.redirect');
 //Route::get('posts', [User\\PostController::class, 'index'])->name(0'posts');
 //Route::get('posts', 'User\\PostController@index')->name('posts');
 
+Route::middleware('guest')->group(function() {
+    Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register']);
+    Route::post('register', ['uses' => 'RegisterController@store', 'as' => 'register.store']);
 
-Route::get('register', ['uses' => 'RegisterController@index', 'as' => 'register']);
-Route::post('register', ['uses' => 'RegisterController@store', 'as' => 'register.store']);
-
-Route::get('login', ['uses' => 'LoginController@index', 'as' => 'login']);
-Route::post('login', ['uses' => 'LoginController@store', 'as' => 'login.store']);
+    Route::get('login', ['uses' => 'LoginController@index', 'as' => 'login']);
+    Route::post('login', ['uses' => 'LoginController@store', 'as' => 'login.store']);
+});
 //Route::get('login/{user}/confirm', ['uses' => 'LoginController@confirm', 'as' => 'login.confirm']);
 //Route::post('login/{user}/confirm', ['uses' => 'LoginController@confirm', 'as' => 'login.confirm']);
 
@@ -43,7 +44,7 @@ Route::get('blog', ['uses' => 'BlogController@index', 'as' => 'blog']);
 Route::get('blog/{post}', ['uses' => 'BlogController@show', 'as' => 'blog.show']);
 Route::post('blog/{post}/like', ['uses' => 'BlogController@like', 'as' => 'blog.like']);
 
-Route::prefix('user')->as('user.')->group(function() {
+Route::prefix('user')->as('user.')->middleware('auth')->group(function() {
 //Указали в RouteServiceProvider namespace, где содержится User\\PostController, чтобы использовать конструкцию ['uses' => 'Controller@method', 'as' => 'route_name']
     Route::get('posts',               ['uses' => 'User\\PostController@index',  'as' => 'posts']);
     Route::get('posts/create',        ['uses' => 'User\\PostController@create', 'as' => 'posts.create']);
