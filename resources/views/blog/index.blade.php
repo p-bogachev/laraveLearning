@@ -1,38 +1,23 @@
-@extends('layouts.base')
+@extends('layouts.main')
 
 @section('page.title', 'Blog Page')
 
-@section('content')
+@section('main.content')
 
-    <h1>
-        Blog page
-    </h1>
-
-    <h3 class="mb-5">
-        List of posts
-    </h3>
+    <x-title>
+        {{ __('List of posts') }}
+    </x-title>
 
     @if(empty($posts))
-        There are no posts
+        {{ ('There are no posts') }}
     @else
-
-        @foreach($posts as $post)
-            <div class="mb-4">
-                <h5>
-                    <a href=" {{ route('blog.show', $post->id) }}">
-
-                        {{ $post->title }} {{$loop->iteration}}
-
-                    </a>
-                </h5>
-
-                <p>
-                    {!! $post->content !!}
-                </p>
-            </div>
-        @endforeach
-
+        <div class="row">
+            @foreach($posts as $post)
+                <div class="col-12 col-md-4">
+                    <x-post.card :post="$post"/>
+                </div>
+            @endforeach
+        </div>
     @endif
 
 @endsection
-

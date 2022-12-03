@@ -1,11 +1,11 @@
-@extends('layouts.base')
+@extends('layouts.main')
 
-@section('page.title', 'Main Page')
+@section('page.title', 'Main page')
 
-@section('content')
-
-    <h1>
-        Main page
-    </h1>
-
+@section('main.content')
+    <div class="text-center">
+        <h1>
+            Main page
+        </h1>
+    </div>
 @endsection
