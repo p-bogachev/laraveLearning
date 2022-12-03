@@ -44,7 +44,10 @@ Route::get('blog', ['uses' => 'BlogController@index', 'as' => 'blog']);
 Route::get('blog/{post}', ['uses' => 'BlogController@show', 'as' => 'blog.show']);
 Route::post('blog/{post}/like', ['uses' => 'BlogController@like', 'as' => 'blog.like']);
 
-Route::prefix('user')->as('user.')->middleware('auth')->group(function() {
+//Route::prefix('user')->as('user.')->middleware('auth', 'active')->group(function() {
+Route::prefix('user')->as('user.')->group(function() {
+    Route::redirect('/', '/user/posts')->name('user');
+
 //Указали в RouteServiceProvider namespace, где содержится User\\PostController, чтобы использовать конструкцию ['uses' => 'Controller@method', 'as' => 'route_name']
     Route::get('posts',               ['uses' => 'User\\PostController@index',  'as' => 'posts']);
     Route::get('posts/create',        ['uses' => 'User\\PostController@create', 'as' => 'posts.create']);
@@ -61,7 +64,7 @@ Route::prefix('user')->as('user.')->middleware('auth')->group(function() {
 //Route::resource('posts', User\\PostController::class)->only(['index', 'show']);
 
 //Route::resource('posts/{post}/comments', CommentController::class);
-Route::get('posts/{post}/comments/{comment}/edit', ['uses' => 'Posts\CommentController@edit', 'as' => 'comments.edit']);
+Route::get('posts/{post}/comments/{comment}/edit.blade.php', ['uses' => 'Posts\CommentController@edit', 'as' => 'comments.edit.blade.php']);
 
 Route::fallback(function () {
    return 'Fallback';

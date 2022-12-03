@@ -8,23 +8,28 @@
     <title>@yield('page.title', config('app.name'))</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.2/css/bootstrap.min.css">
+    <style>
+        .container { max-width: 720px;}
+        .required:after { content: '*'; color: red;}
+    </style>
 </head>
+
 <body>
+    <div class="d-flex flex-column justify-content-between min-vh-100">
 
-<div class="d-flex flex-column justify-content-between min-vh-100 text-center">
+        @include('includes.header')
 
-    @include('includes.header')
+        <main class="flex-grow-1 py-3">
 
-    <main class="flex-grow-1 py-3">
+            @yield('content')
 
-        @yield('content')
+        </main>
 
-    </main>
+        @include('includes.footer')
+    </div>
 
-    @include('includes.footer')
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.2/js/bootstrap.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.2/js/bootstrap.min.js"></script>
+    @stack('js')
+    @stack('css')
 </body>
 </html>
