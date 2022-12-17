@@ -40,7 +40,19 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        $ip = $request->ip(); // наш ip адрес
+//        $path = $request->path(); // путь после слеша
+//        $url = $request->url(); // весь url запроса без query параметров
+//        $fullUrl = $request->fullUrl(); // полный url с параметрами
+
+
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $remember = $request->boolean('remember');
+
+        dd($email, $password, $remember);
+
+        return 'Запрос на вход';
     }
 
     /**

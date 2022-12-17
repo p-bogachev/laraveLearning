@@ -54,7 +54,7 @@ Route::prefix('user')->as('user.')->group(function() {
     Route::post('posts',              ['uses' => 'User\\PostController@store',  'as' => 'posts.store']);
     Route::get('posts/{post}',        ['uses' => 'User\\PostController@show',   'as' => 'posts.show'])->whereNumber('post');
     Route::get('posts/{post}/edit',   ['uses' => 'User\\PostController@edit',   'as' => 'posts.edit']);
-    Route::patch('posts/{post}',      ['uses' => 'User\\PostController@update', 'as' => 'posts.update']);
+    Route::put('posts/{post}',      ['uses' => 'User\\PostController@update', 'as' => 'posts.update']);
     Route::delete('posts/{post}',     ['uses' => 'User\\PostController@delete', 'as' => 'posts.delete']);
     Route::patch('posts/{post}/like', ['uses' => 'User\\PostController@like',   'as' => 'posts.like']);
 });
