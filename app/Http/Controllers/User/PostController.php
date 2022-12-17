@@ -57,14 +57,14 @@ class PostController extends Controller
         return view('user.posts.edit', compact('post'));
     }
 
-    public function patch($post)
+    public function update(Request $request)
     {
         $postName = $request->input('title');
         $postContent = $request->input('content');
 
         dd($postName, $postContent);
 
-        return "Запрос изменения поста {$post}";
+        return "Запрос изменения поста";
     }
 
     public function delete($post)

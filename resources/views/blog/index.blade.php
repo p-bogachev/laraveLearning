@@ -8,6 +8,8 @@
         {{ __('List of posts') }}
     </x-title>
 
+    @include('blog.filter')
+
     @if(empty($posts))
         {{ ('There are no posts') }}
     @else
