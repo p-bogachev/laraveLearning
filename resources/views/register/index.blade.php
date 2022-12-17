@@ -39,7 +39,7 @@
                 </x-form-item>
 
                 <x-form-item>
-                    <x-checkbox name="agree">
+                    <x-checkbox name="agreement">
                         {{__('I agree to the processing of user information')}}
                     </x-checkbox>
                 </x-form-item>

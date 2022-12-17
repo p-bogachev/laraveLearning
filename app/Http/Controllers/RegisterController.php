@@ -34,6 +34,25 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
+//        $data = $request->all();
+//        $data = $request->only(['name', 'email']);
+//        $data = $request->except(['name', 'email']);
+
+        //методы проверки наличия параметров в запросе
+        $request->has('name'); //есть ли параметр в запросе
+        $request->filled('name'); // заполнен ли параметр
+        $request->missing('name'); // пропущен ли
+
+
+        //методы получения параметров в запросе
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $password = $request->input('password');
+//        $agree = !! $request->input('agree');
+        $agreement =  $request->boolean('agreement');
+        $avatar = $request->file('avatar');
+        dd($name, $email, $password, $agreement);
+
         return "Query for registration";
     }
 

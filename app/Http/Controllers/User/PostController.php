@@ -25,8 +25,13 @@ class PostController extends Controller
         return view('user.posts.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        $postName = $request->input('title');
+        $postContent = $request->input('content');
+
+        dd($postName, $postContent);
+
         return "Запрос создание поста";
     }
 
@@ -54,6 +59,11 @@ class PostController extends Controller
 
     public function patch($post)
     {
+        $postName = $request->input('title');
+        $postContent = $request->input('content');
+
+        dd($postName, $postContent);
+
         return "Запрос изменения поста {$post}";
     }
 
