@@ -23,6 +23,9 @@ Route::view('/', 'home.index')->name('home');
 
 //Пример того, что можно использовать контроллер без вызова метода. Тогда вызовется магический метод __invoke
 Route::get('test', TestController::class)->name('test');
+//указываем middleware здесь или в __construct() контроллера
+//Route::get('test', TestController::class)->name('test')->middleware('token:secret');
+
 Route::get('mypage', [MyPlaceController::class, 'index']);
 Route::redirect('redirect', 'mypage')->name('home.redirect');
 //CRUD (create, read, update, delete)
@@ -45,18 +48,18 @@ Route::get('blog/{post}', ['uses' => 'BlogController@show', 'as' => 'blog.show']
 Route::post('blog/{post}/like', ['uses' => 'BlogController@like', 'as' => 'blog.like']);
 
 //Route::prefix('user')->as('user.')->middleware('auth', 'active')->group(function() {
-Route::prefix('user')->as('user.')->group(function() {
+Route::prefix('user')->group(function() {
     Route::redirect('/', '/user/posts')->name('user');
 
 //Указали в RouteServiceProvider namespace, где содержится User\\PostController, чтобы использовать конструкцию ['uses' => 'Controller@method', 'as' => 'route_name']
-    Route::get('posts',               ['uses' => 'User\\PostController@index',  'as' => 'posts']);
-    Route::get('posts/create',        ['uses' => 'User\\PostController@create', 'as' => 'posts.create']);
-    Route::post('posts',              ['uses' => 'User\\PostController@store',  'as' => 'posts.store']);
-    Route::get('posts/{post}',        ['uses' => 'User\\PostController@show',   'as' => 'posts.show'])->whereNumber('post');
-    Route::get('posts/{post}/edit',   ['uses' => 'User\\PostController@edit',   'as' => 'posts.edit']);
-    Route::put('posts/{post}',      ['uses' => 'User\\PostController@update', 'as' => 'posts.update']);
-    Route::delete('posts/{post}',     ['uses' => 'User\\PostController@delete', 'as' => 'posts.delete']);
-    Route::patch('posts/{post}/like', ['uses' => 'User\\PostController@like',   'as' => 'posts.like']);
+    Route::get('posts',               ['uses' => 'User\\PostController@index',  'as' => 'user.posts']);
+    Route::get('posts/create',        ['uses' => 'User\\PostController@create', 'as' => 'user.posts.create']);
+    Route::post('posts',              ['uses' => 'User\\PostController@store',  'as' => 'user.posts.store']);
+    Route::get('posts/{post}',        ['uses' => 'User\\PostController@show',   'as' => 'user.posts.show'])->whereNumber('post');
+    Route::get('posts/{post}/edit',   ['uses' => 'User\\PostController@edit',   'as' => 'user.posts.edit']);
+    Route::put('posts/{post}',        ['uses' => 'User\\PostController@update', 'as' => 'user.posts.update']);
+    Route::delete('posts/{post}',     ['uses' => 'User\\PostController@delete', 'as' => 'user.posts.delete']);
+    Route::patch('posts/{post}/like', ['uses' => 'User\\PostController@like',   'as' => 'user.posts.like']);
 });
 
 //Маршруты для admin находятся в отдельном файле routes/admin.php

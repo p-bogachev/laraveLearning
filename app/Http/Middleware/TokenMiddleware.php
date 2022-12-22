@@ -14,7 +14,7 @@ class TokenMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, string $token, string $foo)
+    public function handle(Request $request, Closure $next, string $token, string $foo = 'default')
     {
         /* dd и dump выводят переданные значения, но dd еще прерывает скрипт*/
 //        dd($foo);

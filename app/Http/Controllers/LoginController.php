@@ -46,13 +46,21 @@ class LoginController extends Controller
 //        $fullUrl = $request->fullUrl(); // полный url с параметрами
 
 
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $remember = $request->boolean('remember');
+//        $email = $request->input('email');
+//        $password = $request->input('password');
+//        $remember = $request->boolean('remember');
+//
+//        dd($email, $password, $remember);
 
-        dd($email, $password, $remember);
+//        return 'Запрос на вход';
+        // аналогично строке выше
+//        return response('Запрос на вход');
 
-        return 'Запрос на вход';
+//        return response()->redirectTo('/foo'); //перенаправление на указанный путь
+//        return response()->redirectToRoute('user'); // перенаправление на указанный маршрут
+
+//        return redirect('foo');
+        return redirect()->route('user');
     }
 
     /**

@@ -30,9 +30,12 @@ class PostController extends Controller
         $postName = $request->input('title');
         $postContent = $request->input('content');
 
-        dd($postName, $postContent);
+//        dd($postName, $postContent);
 
-        return "Запрос создание поста";
+//        $post = new Post;
+
+//        return redirect()->route('user.posts.show', $post->id);
+        return redirect()->route('user.posts.show', 123);
     }
 
     public function show($post)
@@ -57,19 +60,21 @@ class PostController extends Controller
         return view('user.posts.edit', compact('post'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $post)
     {
         $postName = $request->input('title');
         $postContent = $request->input('content');
 
-        dd($postName, $postContent);
+//        dd($postName, $postContent);
 
-        return "Запрос изменения поста";
+//        return redirect()->route('user.posts.show', $post);
+        return redirect()->back();
     }
 
     public function delete($post)
     {
-        return "Запрос удаление поста $post";
+//        return "Запрос удаление поста $post";
+        return redirect()->route('user.posts');
     }
 
     public function like()

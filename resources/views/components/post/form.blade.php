@@ -12,8 +12,6 @@
     </x-form-item>
 
 
-    <x-button type="submit">
-        {{ $slot }}
-    </x-button>
+    {{ $slot }}
 </x-form>
 

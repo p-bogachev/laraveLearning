@@ -16,8 +16,8 @@
 
 
     <x-post.form action=" {{ route('user.posts.store') }}" method="post">
-        {{ __('Create post') }}
+        <x-button type="submit">
+            {{ __('Create post') }}
+        </x-button>
     </x-post.form>
 @endsection
-
-

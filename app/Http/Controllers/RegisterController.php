@@ -51,9 +51,13 @@ class RegisterController extends Controller
 //        $agree = !! $request->input('agree');
         $agreement =  $request->boolean('agreement');
         $avatar = $request->file('avatar');
-        dd($name, $email, $password, $agreement);
+//        dd($name, $email, $password, $agreement);
 
-        return "Query for registration";
+        if (true) {
+            return redirect()->back()->withInput();
+        }
+
+        return redirect()->route('user');
     }
 
     /**

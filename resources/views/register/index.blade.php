@@ -20,7 +20,7 @@
             <x-form action="{{ route('register.store') }}" method="POST">
                 <x-form-item>
                     <x-label required>{{__('Name')}}</x-label>
-                    <x-input name="name" autofocus/>
+                    <x-input name="name" value="{{ request()->old('name') }}" autofocus/>
                 </x-form-item>
 
                 <x-form-item>

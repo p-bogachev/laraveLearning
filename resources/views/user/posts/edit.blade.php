@@ -16,6 +16,8 @@
 
 
     <x-post.form action="{{ route('user.posts.update', $post->id) }}" method="put" :post="$post">
-        {{ __('Edit post') }}
+        <x-button type="submit">
+            {{ 'Save' }}
+        </x-button>
     </x-post.form>
 @endsection
